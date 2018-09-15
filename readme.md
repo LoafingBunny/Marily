@@ -1,3 +1,18 @@
+# Marily
+Marily is a project that attempts to create a dashboard to use to monitor both in real time and offline.
+Don't expect anything better from the forked project as of now but some updated deps. and some small refactoring matching my code style. 
+
+I think to integrate some of these libraries:
+https://github.com/fusesource/jansi to replace the scourses library, in case
+https://github.com/mabe02/lanterna to add nice stuff I still don't know the purpose
+https://github.com/null93/drawille to improve plots
+http://slick.lightbend.com/ to read infos from a database, for later analysis or for real time watching
+maybe also scala-pb as an alternative way to store real time packets
+
+maybe an ipc library might be useful, but thats at a too early stage to decide
+
+the final last ultimate objective is to have a dash and a database standard to debug and visualize the neural network training
+
 # Scurses / Onions
 
 [Scurses](#scurses) and [Onions](#onions) are frameworks for drawing nice things in your terminal using simple, elegant Scala. [Scurses](#scurses) provides a low-level drawing and event handling API while [Onions](#onions) provides a high-level UI API with useful widgets.
