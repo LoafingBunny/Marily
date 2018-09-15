@@ -8,7 +8,7 @@ import net.team2xh.scurses.{Colors, Scurses}
 case class SevenSegment(parent: FramePanel, text: Varying[String])
                        (implicit screen: Scurses) extends FontMapper(parent, empty, symbols, text) {
 
-  color := Colors.BRIGHT_GREEN
+  color := Colors.BRIGHT_GREEN.code
 }
 
 object SevenSegment {

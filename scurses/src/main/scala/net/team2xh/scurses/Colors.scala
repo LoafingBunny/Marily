@@ -2,26 +2,64 @@ package net.team2xh.scurses
 
 import java.awt.Color
 
+/** Simple way to choose one of the colors */
+trait Colors {
+  val code: Int
+}
+
 object Colors {
   // Color codes
-  val DIM_BLACK      =  0
-  val DIM_RED        =  1
-  val DIM_GREEN      =  2
-  val DIM_YELLOW     =  3
-  val DIM_BLUE       =  4
-  val DIM_MAGENTA    =  5
-  val DIM_CYAN       =  6
-  val DIM_WHITE      =  7
-  val BRIGHT_BLACK   =  8
-  val BRIGHT_RED     =  9
-  val BRIGHT_GREEN   = 10
-  val BRIGHT_YELLOW  = 11
-  val BRIGHT_BLUE    = 12
-  val BRIGHT_MAGENTA = 13
-  val BRIGHT_CYAN    = 14
-  val BRIGHT_WHITE   = 15
+  case object DIM_BLACK      extends Colors {
+    override val code: Int = 0
+  }
+  case object DIM_RED        extends Colors {
+    override val code: Int = 1
+  }
+  case object DIM_GREEN      extends Colors {
+    override val code: Int = 2
+  }
+  case object DIM_YELLOW     extends Colors {
+    override val code: Int = 3
+  }
+  case object DIM_BLUE       extends Colors {
+    override val code: Int = 4
+  }
+  case object DIM_MAGENTA    extends Colors {
+    override val code: Int = 5
+  }
+  case object DIM_CYAN       extends Colors {
+    override val code: Int = 6
+  }
+  case object DIM_WHITE      extends Colors {
+    override val code: Int = 7
+  }
+  case object BRIGHT_BLACK   extends Colors {
+    override val code: Int = 8
+  }
+  case object BRIGHT_RED     extends Colors {
+    override val code: Int = 9
+  }
+  case object BRIGHT_GREEN   extends Colors {
+    override val code: Int = 10
+  }
+  case object BRIGHT_YELLOW  extends Colors {
+    override val code: Int = 11
+  }
+  case object BRIGHT_BLUE    extends Colors {
+    override val code: Int = 12
+  }
+  case object BRIGHT_MAGENTA extends Colors {
+    override val code: Int = 13
+  }
+  case object BRIGHT_CYAN    extends Colors {
+    override val code: Int = 14
+  }
+  case object BRIGHT_WHITE   extends Colors {
+    override val code: Int = 15
+  }
 
-  def fromName(name: String) = name match {
+  /** because one may still want to use strings to define colors */
+  def fromName(name: String): Colors = name match {
     case "black"   => DIM_BLACK
     case "red"     => BRIGHT_RED
     case "green"   => BRIGHT_GREEN
@@ -33,6 +71,7 @@ object Colors {
     case "gray"    => BRIGHT_BLACK
   }
 
+  /** define a color by its components */
   def fromRGB(color: (Int, Int, Int)): Int = {
     val distances = xtermRGB.map(distance(color, _)).zipWithIndex
     distances.minBy(_._1)._2
@@ -40,6 +79,7 @@ object Colors {
 
   def fromHex(hex: String): Int = fromRGB(hexToRGB(hex))
 
+  /** an int is 4 bytes: 1 byte to define each of the 3 base colors plus alpha channel */
   def fromRGBInt(int: Int): Int = {
     val color = new Color(int)
     fromRGB((color.getRed, color.getGreen, color.getBlue))
@@ -88,6 +128,7 @@ object Colors {
 
   private val xtermRGB = xtermHex map hexToRGB
 
+  /** compute the euclidean distance of two colors */
   private def distance(a: (Int, Int, Int), b: (Int, Int, Int)): Double = {
     val x = a._1 - b._1
     val y = a._2 - b._2

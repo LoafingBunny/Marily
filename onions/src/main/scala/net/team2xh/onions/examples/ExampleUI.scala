@@ -77,9 +77,9 @@ object ExampleUI extends App {
     radio.subscribe { () =>
       val color = radio.value match {
         case 0 => frame.currentTheme.foreground
-        case 1 => Colors.BRIGHT_RED
-        case 2 => Colors.BRIGHT_GREEN
-        case 3 => Colors.BRIGHT_BLUE
+        case 1 => Colors.BRIGHT_RED.code
+        case 2 => Colors.BRIGHT_GREEN.code
+        case 3 => Colors.BRIGHT_BLUE.code
       }
       big.color := color
     }
