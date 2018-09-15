@@ -53,7 +53,7 @@ case class BarChart[T: Numeric](parent: FramePanel, values: Varying[Seq[T]], lab
     val spacing = graphHeight / (vs.length - 1)
     val spaceTop = (graphHeight - (vs.length - 1) * spacing - 1) / 2
     val zero = math.floor(((0 - valueMin) * graphWidth.toDouble) / (valueMax - valueMin)).toInt
-    for ((y, i) <- (spaceTop until spaceTop + vs.length * spacing by spacing).zipWithIndex) {
+    for ((y, i) <- (spaceTop until spaceTop + vs.length * spacing by (if (spacing == 0) 1 else spacing)).zipWithIndex) {
       val length = math.round(((vs(i).toDouble - valueMin) * graphWidth) / (valueMax - valueMin)).toInt
       // Draw the bars themselves
       if (vs(i).toDouble >= 0) {
